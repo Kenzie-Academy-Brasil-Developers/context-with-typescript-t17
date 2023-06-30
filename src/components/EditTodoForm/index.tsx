@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { TodosContext } from "../../providers/TodosContext/TodosContext";
 
 export const EditTodoForm = () => {
-   const { editingTodo, editTodo } = useContext(TodosContext);
+   const { editingTodo, editTodo, setEditingTodo } = useContext(TodosContext);
 
    const {
       register,
@@ -22,6 +22,7 @@ export const EditTodoForm = () => {
    const submit: SubmitHandler<TEditTodoForm> = (formData) => {
       if (editingTodo?.id) {
          editTodo(formData, editingTodo.id);
+         setEditingTodo(null);
       }
    };
 
@@ -31,7 +32,7 @@ export const EditTodoForm = () => {
          {errors.title ? <p>{errors.title.message}</p> : null}
          <input type="text" {...register("content")} />
          {errors.content ? <p>{errors.content.message}</p> : null}
-         <button type="submit">Cadastrar nota</button>
+         <button type="submit">Atualizar nota</button>
       </form>
    );
 };
